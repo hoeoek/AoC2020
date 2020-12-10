@@ -4,6 +4,37 @@ def load_data():
         return [x.strip() for x in file.readlines()]
 
 
+rules = load_data()
+
+# The following two paragraphs are cheated, but i was trying to do this basically
+
+bags = {}
+for rule in rules:
+    bag, contains = rule.split('contain')
+    bag = bag.replace(' bags', '')
+    bags[bag] = contains
+
+
+answer = set()
+q = ['shiny gold']
+while len(q) != 0:
+    current = q.pop(0)
+    for bag in bags:
+        if bag in answer:
+            continue
+        if current in bags[bag]:
+            q.append(bag)
+            answer.add(bag)
+    print(q)
+print(answer)
+print(len(answer))
+
+
+
+
+
+
+
 def generate_list():
     list_of_rules = load_data()
     bag_rules = []
@@ -28,6 +59,7 @@ def finder(bag_color):
     return res[0]
 
 
+
 def looper(start):
     bag_steps = 0
     bag_list = []
@@ -47,17 +79,34 @@ def looper(start):
                 bag_list.append(finder(search_word_color))
                 print(search_word_color)
                 res.append(search_word_color)
-    print(res)
-    print(len(res))
-    print(set(res))
-    print(len(set(res)))
+
+
+def case_one(start):
+    bag_list = finder(start)
+    bag_list = bag_list_to_colors(bag_list)
+    print(bag_list)
+    for bag in bag_list:
+        print(bag)
+
+        print(bag_list_to_colors(finder(bag)))
+        bag_list.append(bag_list_to_colors(finder(bag)))
 
 
 
 
-looper('shiny gold')
+def bag_list_to_colors(bag_list):
+    res = []
+    for bag in bag_list:
+        if 'no other' in bag:
+            break
+        else:
+            bag = bag.split(' ')
+            res.append(bag[1] + ' ' + bag[2])
+    return res
+
 
 
 # Guesses
 # 31
 # 30
+# 27
