@@ -31,11 +31,56 @@ def problem_one():
     print(answer)
     print(len(answer))
 
-problem_one()
+# problem_one()
+
+# problem_two:
+
+
+def problem_two():
+    rules = load_data()
+    bags = {}
+    for rule in rules:
+        bag, contains = rule.split('contain')
+        bag = bag.replace(' bags', '')
+        bags[bag] = contains
+
+    bag_counter = 0
+    answer = set()
+    q = ['shiny gold']
+    while len(q) != 0:
+        current = q.pop(0)
+        for bag in bags:
+            if bag in answer:
+                continue
+            if current in bags[bag]:
+
+                q.append(bag)
+                answer.add(bag)
+        print(q)
+    print(answer)
+    print(len(answer))
+
+
+def extract_number(string):
+    # only works for strings with one (multidigit) number
+    num_str = ''
+    for char in string:
+        if char.isdigit():
+            num_str += char
+    return int(num_str)
 
 
 
 
+
+
+
+
+
+
+
+
+# Here be dead code:
 
 
 def generate_list():
