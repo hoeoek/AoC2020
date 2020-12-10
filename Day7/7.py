@@ -4,31 +4,34 @@ def load_data():
         return [x.strip() for x in file.readlines()]
 
 
-rules = load_data()
 
-# The following two paragraphs are cheated, but i was trying to do this basically
-
-bags = {}
-for rule in rules:
-    bag, contains = rule.split('contain')
-    bag = bag.replace(' bags', '')
-    bags[bag] = contains
+# The function was stolen-ish, but i was trying to do this basically
 
 
-answer = set()
-q = ['shiny gold']
-while len(q) != 0:
-    current = q.pop(0)
-    for bag in bags:
-        if bag in answer:
-            continue
-        if current in bags[bag]:
-            q.append(bag)
-            answer.add(bag)
-    print(q)
-print(answer)
-print(len(answer))
+def problem_one():
+    rules = load_data()
+    bags = {}
+    for rule in rules:
+        bag, contains = rule.split('contain')
+        bag = bag.replace(' bags', '')
+        bags[bag] = contains
 
+
+    answer = set()
+    q = ['shiny gold']
+    while len(q) != 0:
+        current = q.pop(0)
+        for bag in bags:
+            if bag in answer:
+                continue
+            if current in bags[bag]:
+                q.append(bag)
+                answer.add(bag)
+        print(q)
+    print(answer)
+    print(len(answer))
+
+problem_one()
 
 
 
