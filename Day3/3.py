@@ -15,7 +15,6 @@ def slope_counter(right, down):
 
     x, y = 0, 0
     tree_count = 0
-    #for i, line in enumerate(detailed_map):
     for line in detailed_map:
         y += down
         x += right
@@ -32,11 +31,7 @@ def slope_counter(right, down):
         else:
             detailed_map[y][x] = "O"
 
-    #for row in detailed_map:
-        #print(row)
 
-    #for line in detailed_map:
-        #print("".join(line))
 
     print("Tree count: {}".format(tree_count))
     return tree_count
